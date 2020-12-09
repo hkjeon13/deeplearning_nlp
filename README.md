@@ -1,2 +1,2 @@
-# deeplearning_nlp
-딥러닝을 활용한 자연어 처리
+# 딥러닝을 활용한 자연어 처리(deeplearning_nlp)
+딥러닝을 활용한 자연어 처리 레퍼지토리입니다.
