@@ -18,6 +18,7 @@ class ANN(object):
     def loss(self, y_true, y_pred):
         tensor = np.abs(y_true - y_pred)
         tensor = np.square(tensor)
+        tensor = np.sum(np.squeeze(tensor))
         return tensor
 
     def minimize(self, x_input, y_true, epochs=100):
@@ -41,11 +42,11 @@ class ANN(object):
 
 if __name__ == '__main__':
     x = np.array([-10, 20, 0, 30, 4])
-    y= np.array([0])
+    y= np.array([2, 10])
 
-    ann = ANN(5, 1)
+    ann = ANN(5, 2)
     print(f'[initial] weight:{ann.weight}, bias:{ann.bias}, output:{ann(x)}')
 
-    epochs=100
+    epochs=10000
     ann.minimize(x,y, epochs=epochs)
     print(f'[learned(epochs={epochs})] weight:{ann.weight}, bias:{ann.bias}, output:{ann(x)}')
