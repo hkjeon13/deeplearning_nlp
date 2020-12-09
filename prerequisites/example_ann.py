@@ -15,9 +15,14 @@ class ANN(object):
     def activation(self, tensor):
         return np.where(tensor > 0, tensor, 0)
 
-    def minimize(self, x_input, y_label, epochs=100):
+    def loss(self, y_true, y_pred):
+        tensor = np.abs(y_true - y_pred)
+        tensor = np.square(tensor)
+        return tensor
+
+    def minimize(self, x_input, y_true, epochs=100):
         for epoch in range(epochs):
-            diff_original = np.square(np.abs(y_label-self(x_input)))
+            diff_original = self.loss(y_true, self(x_input))
 
             new_weight = np.add(self.weight, np.random.random(self.weight.shape))
             new_bias = np.add(self.bias, np.random.random(self.bias.shape))
@@ -26,7 +31,7 @@ class ANN(object):
             y_pred2 = np.add(y_pred2, new_bias)
             y_pred2 = self.activation(y_pred2)
 
-            diff_new = np.square(np.abs(y_label - y_pred2))
+            diff_new = self.loss(y_true, y_pred2)
 
             if diff_original > diff_new:
                 self.weight = new_weight
