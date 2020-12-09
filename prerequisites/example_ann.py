@@ -22,6 +22,7 @@ class ANN(object):
         return tensor
 
     def minimize(self, x_input, y_true, epochs=100):
+        # randomly minimizing
         for epoch in range(epochs):
             diff_original = self.loss(y_true, self(x_input))
 
