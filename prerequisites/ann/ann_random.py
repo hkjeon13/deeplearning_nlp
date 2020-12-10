@@ -12,8 +12,17 @@ class ANN(object):
         tensor = self.activation(tensor)
         return tensor
 
-    def activation(self, tensor):
-        return np.where(tensor > 0, tensor, 0)
+    def activation(self, tensor, func='relu'):
+        if func=='linear':
+            return tensor
+        elif func=='relu':
+            return np.where(tensor > 0, tensor, 0)
+        elif func=='sigmoid':
+            return 1/(1+np.exp(-tensor))
+        elif func=='tanh':
+            return np.tanh(tensor)
+        else:
+            raise KeyError('정의되지 않은 함수입니다.')
 
     def loss(self, y_true, y_pred):
         tensor = np.abs(y_true - y_pred)
@@ -38,6 +47,7 @@ class ANN(object):
             if diff_original > diff_new:
                 self.weight = new_weight
                 self.bias = new_bias
+                print(f'loss: {diff_new}')
                 # print(f'Epoch {epoch} - weight:{self.weight}, bias:{self.bias}, output:{y_pred2}')
 
 
