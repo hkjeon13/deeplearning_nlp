@@ -64,6 +64,6 @@ if __name__ == '__main__':
     ann = ANN(4, 1)
     print(f'[initial] weight:{ann.weights}, bias:{ann.bias}, output:{ann(x)}')
 
-    epochs=10000
-    ann.minimize(x,y, epochs=epochs)
+    epochs = 10000
+    ann.minimize(x, y, epochs=epochs)
     print(f'[learned(epochs={epochs})] weight:{ann.weights}, bias:{ann.bias}, output:{ann(x)}')
